@@ -19078,8 +19078,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  limitY: {x: -5, y: 5}
+  limitY: {x: -5, y: 13}
   limitX: {x: -5, y: 5}
+  player: {fileID: 1899511357}
 --- !u!1 &1819021833
 GameObject:
   m_ObjectHideFlags: 0
