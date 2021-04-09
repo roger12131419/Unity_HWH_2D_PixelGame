@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI; // 引用 介面 API
 public class player : MonoBehaviour
 {
     //註解 
@@ -94,6 +94,24 @@ public class player : MonoBehaviour
         // 呼叫方法
         // 方法名稱
         Move();
+    }
+
+    [Header("吃金條音效")]
+    public AudioClip soundEat;
+    [Header("金幣數量")]
+    public Text textCoin;
+
+    private int coin;
+    //觸發事件 - 進入 : 兩個物件必須有一個勾選 Is Trigeer 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       if (collision.tag == "金條")
+       {
+            coin++;
+            aud.PlayOneShot(soundEat);
+            Destroy(collision.gameObject);
+            textCoin.text = "金幣 : " + coin;
+       }
     }
 }
 
