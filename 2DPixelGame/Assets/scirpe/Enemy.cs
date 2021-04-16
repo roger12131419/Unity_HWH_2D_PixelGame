@@ -8,13 +8,25 @@ public class Enemy : MonoBehaviour
     public float rangeAttack = 0.5f;
     [Header("移動速度"), Range(0, 50)]
     public float speed = 2;
+    [Header("攻擊特效")]
+    public ParticleSystem psAttack;
+    [Header("攻擊冷卻時間"), Range(0, 10)]
+    public float cdAttack = 3;
+    [Header("攻擊力"), Range(0, 1000)]
+    public float attack = 20;
+    
     private Transform player;
-
+    /// <summary>
+    ///  計時器
+    /// </summary>
+    private float timer;
+    
     private void Start()
     {
         // 玩家變形 = 尋找遊戲物件("物件名稱").變形
         player = GameObject.Find("玩家").transform;
     }
+   
     // 繪製圖示事件 : 在 Unity 內顯示輔助開發
     private void OnDrawGizmos()
     {
@@ -40,14 +52,34 @@ public class Enemy : MonoBehaviour
         // 距離 等於 三圍向量 的 距離(A 點，B點)
         float dis = Vector3.Distance(transform.position, player.position);
 
-        // 如果 距離 小於等於 追蹤範圍 才開始追蹤
-        if (dis <= rangeTrack)
+        // 如果 距離 小魚等魚 攻擊範圍 進入攻擊狀態
+        // 否則 距離 小於等於 追蹤範圍 才開始追蹤
+        if (dis <= rangeAttack)
+        {
+            Attack();
+        }
+        else if (dis <= rangeTrack)
         {
             // 物件 的 座標 更新為 三維向量 的 往前移動(物件 的 座標，目標 的座標，速度 * 一禎的時間)
           transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
     }
-    
+    /// <summary>
+    /// 攻擊
+    /// </summary>
+    private void Attack()
+    {
+        timer += Time.deltaTime;    // 累加時間
+        // 如果 計時器 大於等於 冷卻時間 就攻擊
+        if (timer >= cdAttack)
+        {
+            timer = 0;                  // 計時器 歸零   
+            psAttack.Play();            // 播放 攻擊特效
+        
+        }
+ 
+       
+    }
 
 }
 
