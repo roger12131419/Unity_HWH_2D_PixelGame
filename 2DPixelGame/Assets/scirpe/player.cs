@@ -57,8 +57,8 @@ public class player : MonoBehaviour
     /// <summary>
     /// 移動
     /// </summary>
-    private void Move() 
-    {
+    private void Move()
+    { 
         float h = joystick.Horizontal;
         float v = joystick.Vertical;
 
@@ -82,11 +82,12 @@ public class player : MonoBehaviour
         if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<ltem>().DropProp();
     }
     
+    ///要被其他腳本呼叫也要設定為公開
     /// <summary>
     /// 受傷
     /// </summary>
     /// <param name="damage">接收到的傷害值</param>
-    private void Hit(float damage)
+    public void Hit(float damage)
     {
         hp -= damage;                            // 扣除傷害值
         hpManger.UpdateHpBar(hp, hpMax);         // 更新血量
@@ -97,9 +98,9 @@ public class player : MonoBehaviour
     }
     // 事件 - 特定時間會執行的方法
     // 事件開始 : 播放後執行一次
-    private void start() 
+    private void Start() 
     {
-        
+        hpMax = hp;
     }
     // 更新事件 : 大約一秒執行六十次 60FPS
     private void Update()

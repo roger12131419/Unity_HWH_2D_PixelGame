@@ -75,7 +75,8 @@ public class Enemy : MonoBehaviour
         {
             timer = 0;                  // 計時器 歸零   
             psAttack.Play();            // 播放 攻擊特效
-        
+            Collider2D hit = Physics2D.OverlapCircle(transform.position, rangeAttack);
+            hit.GetComponent<player>().Hit(attack);
         }
  
        
