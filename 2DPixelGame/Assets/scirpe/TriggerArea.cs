@@ -12,6 +12,7 @@ public class TriggerArea : MonoBehaviour
             Debug.LogError("ok");
             stones[0].SetActive(false);
             stones[1].SetActive(false);
+            stones[2].SetActive(false);
         }
     }
 

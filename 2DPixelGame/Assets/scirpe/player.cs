@@ -34,7 +34,14 @@ public class player : MonoBehaviour
     public AudioSource aud;
     [Header("攻擊音效")]
     public AudioClip soundAttack;
+    [Header("血量")]
+    public float hp = 200;
+    [Header("血調系統")]
+    public HpManger hpManger;
 
+    private float hpMax;
+    
+    // 事件:繪製圖示
     private void OnDrawGizmos()
     {
         // 指定圖示顏色 (紅，綠，藍，透明)
@@ -74,9 +81,15 @@ public class player : MonoBehaviour
         // 如果 碰到的物件存在 並且 碰到的物件 標籤 為 道具 就 取得道具腳本並呼叫掉落道具方法
         if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<ltem>().DropProp();
     }
-    private void Hit()
+    
+    /// <summary>
+    /// 受傷
+    /// </summary>
+    /// <param name="damage">接收到的傷害值</param>
+    private void Hit(float damage)
     {
-
+        hp -= damage;                            // 扣除傷害值
+        hpManger.UpdateHpBar(hp, hpMax);         // 更新血量
     }
     private void Dead()
     {
