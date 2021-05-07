@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI; // 引用 介面 API
+using UnityEngine.SceneManagement;// 引用場景管理 API
 public class player : MonoBehaviour
 {
     //註解 
@@ -19,6 +20,7 @@ public class player : MonoBehaviour
     public int lv = 1;
     [Header("移動速度"), Range(0, 300)]
     public float speed = 10.5f;
+    [Header("角色是否死亡")]
     public bool isDead = false;
     [Tooltip("這是角色的名稱")]
     public string cName = "貓咪";
@@ -58,7 +60,9 @@ public class player : MonoBehaviour
     /// 移動
     /// </summary>
     private void Move()
-    { 
+    {
+        if (isDead) return;                //如果 死亡 就跳出
+
         float h = joystick.Horizontal;
         float v = joystick.Vertical;
 
@@ -89,19 +93,35 @@ public class player : MonoBehaviour
     /// <param name="damage">接收到的傷害值</param>
     public void Hit(float damage)
     {
-        hp -= damage;                            // 扣除傷害值
-        hpManger.UpdateHpBar(hp, hpMax);         // 更新血量
-        StartCoroutine(hpManger.ShowDamage());   // 啟動協同程序(顯示傷害值())
+        hp -= damage;                                  // 扣除傷害值
+        hpManger.UpdateHpBar(hp, hpMax);               // 更新血量
+        StartCoroutine(hpManger.ShowDamage(damage));   // 啟動協同程序(顯示傷害值())
+
+        if (hp <= 0) Dead();                           // 如果 血量 <= 0 就死亡    
     }
+
+    /// <summary>
+    ///  死亡
+    /// </summary>
     private void Dead()
     {
-
+        hp = 0;
+        isDead = true;
+        Invoke("Replay", 2);        // 延遲呼叫("方法名稱"， 延遲名稱)
+        
+    }
+    /// <summary>
+    /// 重新遊戲
+    /// </summary>
+    private void Replay() 
+    {
+        SceneManager.LoadScene("遊戲場景");
     }
     // 事件 - 特定時間會執行的方法
     // 事件開始 : 播放後執行一次
     private void Start() 
     {
-        hpMax = hp;
+        hpMax = hp;   // 取得血量最大值
     }
     // 更新事件 : 大約一秒執行六十次 60FPS
     private void Update()

@@ -20,9 +20,18 @@ public class Enemy : MonoBehaviour
     ///  計時器
     /// </summary>
     private float timer;
-    
+   
+    [Header("血量")]
+    public float hp = 200;
+    [Header("血調系統")]
+    public HpManger hpManger;
+
+    private float hpMax;
+
     private void Start()
     {
+        hpMax = hp;   // 取得血量最大值
+        
         // 玩家變形 = 尋找遊戲物件("物件名稱").變形
         player = GameObject.Find("玩家").transform;
     }
