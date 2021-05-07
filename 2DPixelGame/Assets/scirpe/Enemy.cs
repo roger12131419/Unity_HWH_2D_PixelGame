@@ -14,7 +14,8 @@ public class Enemy : MonoBehaviour
     public float cdAttack = 3;
     [Header("攻擊力"), Range(0, 1000)]
     public float attack = 20;
-    
+    [Header("角色是否死亡")]
+    public bool isDead = false;
     private Transform player;
     /// <summary>
     ///  計時器
@@ -90,6 +91,27 @@ public class Enemy : MonoBehaviour
  
        
     }
+    /// <summary>
+    /// 受傷
+    /// </summary>
+    /// <param name="damage">接收到的傷害值</param>
+    public void Hit(float damage)
+    {
+        hp -= damage;                                  // 扣除傷害值
+        hpManger.UpdateHpBar(hp, hpMax);               // 更新血量
+        StartCoroutine(hpManger.ShowDamage(damage));   // 啟動協同程序(顯示傷害值())
 
+        if (hp <= 0) Dead();                           // 如果 血量 <= 0 就死亡    
+    }
+
+    /// <summary>
+    ///  死亡
+    /// </summary>
+    private void Dead()
+    {
+        hp = 0;
+        isDead = true;
+        Destroy(gameObject, 1.5f);
+    }
 }
 

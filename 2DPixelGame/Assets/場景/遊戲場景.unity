@@ -7583,9 +7583,10 @@ GameObject:
   - component: {fileID: 803975617}
   - component: {fileID: 803975616}
   - component: {fileID: 803975619}
-  m_Layer: 0
+  - component: {fileID: 803975620}
+  m_Layer: 8
   m_Name: "\u9B54\u738B"
-  m_TagString: Untagged
+  m_TagString: "\u6575\u4EBA"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7694,8 +7695,25 @@ MonoBehaviour:
   psAttack: {fileID: 419424257}
   cdAttack: 1
   attack: 20
+  isDead: 0
   hp: 200
-  hpManger: {fileID: 0}
+  hpManger: {fileID: 1894481810}
+--- !u!70 &803975620
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803975615}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 0.8, y: 1}
+  m_Direction: 0
 --- !u!1001 &957764964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24848,6 +24866,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63ee4b6a40c55fd429759b807832ded1, type: 3}
+--- !u!114 &1894481810 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4774746432557156816, guid: 3aef919751c1f3a48b22b54e7a6ad802,
+    type: 3}
+  m_PrefabInstance: {fileID: 1023644332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370a6821fddb3b542ac858a4f2a47a74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1899511355
 GameObject:
   m_ObjectHideFlags: 0
@@ -24979,6 +25009,7 @@ MonoBehaviour:
   soundAttack: {fileID: 8300000, guid: 4505d5689bef32f4d942467c8cca981c, type: 3}
   hp: 200
   hpManger: {fileID: 1360057001}
+  attack: 20
   soundEat: {fileID: 8300000, guid: 09c2332d1d7a3984292cae0924262ea5, type: 3}
   textCoin: {fileID: 1242083149}
 --- !u!50 &1899511360

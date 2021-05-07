@@ -40,7 +40,9 @@ public class player : MonoBehaviour
     public float hp = 200;
     [Header("血調系統")]
     public HpManger hpManger;
-
+    [Header("攻擊力"), Range(0, 1000)]
+    public float attack = 20;
+    
     private float hpMax;
     
     // 事件:繪製圖示
@@ -84,6 +86,9 @@ public class player : MonoBehaviour
 
         // 如果 碰到的物件存在 並且 碰到的物件 標籤 為 道具 就 取得道具腳本並呼叫掉落道具方法
         if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<ltem>().DropProp();
+        // 如果 打到的標籤是 敵人 就對他造成傷害
+        if (hit && hit.collider.tag == "敵人") hit.collider.GetComponent<Enemy>().Hit(attack);
+
     }
     
     ///要被其他腳本呼叫也要設定為公開
