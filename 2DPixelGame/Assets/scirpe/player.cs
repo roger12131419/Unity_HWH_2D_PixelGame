@@ -3,7 +3,8 @@ using UnityEngine.UI; // 引用 介面 API
 using UnityEngine.SceneManagement;// 引用場景管理 API
 public class player : MonoBehaviour
 {
-    //註解 
+    #region 欄位
+     //註解 
 
     //欄位語法 Field - 儲存資料
     //修飾詞 類型 名稱 (指定 值);
@@ -42,11 +43,17 @@ public class player : MonoBehaviour
     public float attack = 20;
     [Header("等級文字")]
     public Text textLv;
+   [Header("吃金條音效")]
+    public AudioClip soundEat;
+    [Header("金幣數量")]
+    public Text textCoin;
     //[Header("角色是否死亡")]
     private bool isDead = false;
-    
     private float hpMax;
+    private int coin;
+    #endregion
     
+    #region 方法
     // 事件:繪製圖示
     private void OnDrawGizmos()
     {
@@ -124,6 +131,37 @@ public class player : MonoBehaviour
     {
         SceneManager.LoadScene("遊戲場景");
     }
+    #endregion
+
+    private float exp;
+    /// <summary>
+    /// 需要多少經驗值才能升為，等設定為100
+    /// </summary>
+    private float expNeed = 100;
+
+    [Header("經驗值吧條")]
+    public Image imgExp;
+
+    /// <summary>
+    /// 經驗值控制
+    /// </summary>
+    /// <param name="getExp">接收到的經驗值</param>
+    public void Exp(float getExp)
+    {
+        exp += getExp;
+        print("經驗值" + exp);
+        imgExp.fillAmount = exp / expNeed;
+       
+        //升級              
+        if (exp >= expNeed)                   // 如果 經驗值 >= 經驗需求 ex 120>100          
+        {
+            lv++;                             // 升級 ex2
+            textLv.text = "Lv" + lv;          // 介面更新 ex Lv2
+            exp -= expNeed;                    // 將多餘經驗值補回來 ex 120-100-20
+            imgExp.fillAmount = exp / expNeed;// 更新介面
+        }
+    }
+    # region 事件
     // 事件 - 特定時間會執行的方法
     // 事件開始 : 播放後執行一次
     private void Start() 
@@ -138,12 +176,6 @@ public class player : MonoBehaviour
         Move();
     }
 
-    [Header("吃金條音效")]
-    public AudioClip soundEat;
-    [Header("金幣數量")]
-    public Text textCoin;
-
-    private int coin;
     //觸發事件 - 進入 : 兩個物件必須有一個勾選 Is Trigeer 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -155,7 +187,8 @@ public class player : MonoBehaviour
             textCoin.text = "金幣 : " + coin;
        }
     }
+    #endregion
 }
 
-    
+
 
