@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     public float cdAttack = 3;
     [Header("攻擊力"), Range(0, 1000)]
     public float attack = 20;
-    [Header("經驗值"), Range(0, 500)]
+    [Header("經驗值"), Range(0, 50000)]
     public float exp = 30;
     
     private Transform player;

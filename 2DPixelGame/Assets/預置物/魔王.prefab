@@ -4936,7 +4936,7 @@ MonoBehaviour:
   psAttack: {fileID: 5390861943275727065}
   cdAttack: 1
   attack: 20
-  isDead: 0
+  exp: 100
   hp: 200
   hpManger: {fileID: 617977164926639012}
 --- !u!70 &5390861943593201948

@@ -148,20 +148,44 @@ public class player : MonoBehaviour
     /// <param name="getExp">接收到的經驗值</param>
     public void Exp(float getExp)
     {
+        // 取得目前等級需要的經驗需求
+        // 要取得的資料為 等級 減一
+        expNeed = expData.exp[lv - 1];
+        
+        
         exp += getExp;
         print("經驗值" + exp);
         imgExp.fillAmount = exp / expNeed;
-       
-        //升級              
-        if (exp >= expNeed)                   // 如果 經驗值 >= 經驗需求 ex 120>100          
+
+        // 升級      
+        // 迴圈 while
+        // 語法
+        // while (布林值) ( 布林值 ) (布林值 為 true 時持續執行)
+        // if (布林值) ( 布林直 為 true 時執行一次 )
+        while (exp >= expNeed)                   // 如果 經驗值 >= 經驗需求 ex 120>100          
         {
             lv++;                             // 升級 ex2
             textLv.text = "Lv" + lv;          // 介面更新 ex Lv2
-            exp -= expNeed;                    // 將多餘經驗值補回來 ex 120-100-20
+            exp -= expNeed;                   // 將多餘經驗值補回來 ex 120-100-20
             imgExp.fillAmount = exp / expNeed;// 更新介面
+            expNeed = expData.exp[lv - 1];
+            LevelUp();                        // 呼叫升級方法
         }
     }
-
+    /// <summary>
+    /// 升級後的數據更新，攻擊力與血量，升級後恢復血量
+    /// </summary>
+    private void LevelUp()
+    {
+        // 攻擊力每一時提升 10，從20 開始
+        attack = 20 + (lv - 1) * 10;
+        // 血量每一等提升 50，從200 開始
+        hpMax = 200 + (lv - 1) * 50;
+        
+        hp = hpMax;                      // 恢復血量全滿
+        hpManger.UpdateHpBar(hp, hpMax); // 更新血條
+    }
+    
     [Header("經驗值資料")]
     public ExpData expData;
 
