@@ -20497,6 +20497,7 @@ MonoBehaviour:
   soundEat: {fileID: 8300000, guid: 09c2332d1d7a3984292cae0924262ea5, type: 3}
   textCoin: {fileID: 1242083149}
   imgExp: {fileID: 1205874564}
+  expData: {fileID: 11400000, guid: c2883dea6ae451042ad62c32fba6153d, type: 2}
 --- !u!50 &1899511360
 Rigidbody2D:
   serializedVersion: 4

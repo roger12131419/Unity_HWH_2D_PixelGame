@@ -161,12 +161,24 @@ public class player : MonoBehaviour
             imgExp.fillAmount = exp / expNeed;// 更新介面
         }
     }
+
+    [Header("經驗值資料")]
+    public ExpData expData;
+
     # region 事件
     // 事件 - 特定時間會執行的方法
     // 事件開始 : 播放後執行一次
     private void Start() 
     {
         hpMax = hp;   // 取得血量最大值
+
+        // 利用公式寫入經驗值資料 - 一等 100 ， 兩等 200...
+        for (int i = 0; i < 99; i++)
+        {
+            // 經驗值資料 的 經驗值陣列[編號] = 公式
+            // 公式 : (編號 + 1) * 100 - 每等增加 100
+            expData.exp[i] = (i + 1) * 100;
+        }
     }
     // 更新事件 : 大約一秒執行六十次 60FPS
     private void Update()
